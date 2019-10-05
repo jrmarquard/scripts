@@ -1,8 +1,8 @@
 import os
-import sys
 import re
 import shutil
 from datetime import datetime, timedelta
+import argparse
 
 # Sort photos that occur before this time into the previous day
 FOUR_AM = int("040000")
@@ -12,7 +12,12 @@ DAY_OVERLAP_CUTOFF = FOUR_AM
 REGEX_CAMERA_FILES = r'(\d{4})(\d{2})(\d{2})_(\d{6}).*'
 
 if __name__ == "__main__":
-    dir_path = os.path.abspath(sys.argv[1])
+    parser = argparse.ArgumentParser(description='This is my help')
+    parser.add_argument('path', type=str,
+                        help='The folder with photos to sort')
+    args = parser.parse_args()
+    dir_path = args.path
+
     files = [f for f in os.listdir(dir_path) if os.path.isfile(
         os.path.join(dir_path, f))]
 
