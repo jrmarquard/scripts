@@ -9,7 +9,9 @@ FOUR_AM = int("040000")
 DAY_OVERLAP_CUTOFF = FOUR_AM
 
 # Filenames: year, month, month_day, and time
-REGEX_CAMERA_FILES = r'(\d{4})(\d{2})(\d{2})_(\d{6}).*'
+PREFIXES = ["PXL_", "VID_", "IMG_", "MVIMG_"]
+PREFIXES_REG = f"(?:{'|'.join(PREFIXES)})"
+REGEX_CAMERA_FILES = f'{PREFIXES_REG}{{0,1}}(\\d{{4}})(\\d{{2}})(\\d{{2}})_(\\d+).*'
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='This is my help')
